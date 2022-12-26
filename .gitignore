@@ -103,6 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
-# WebStorm file
+# WebStorm files
 .DS_Store
 .idea/
+
+# Sequelize file
+database.sqlite3
