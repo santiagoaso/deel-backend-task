@@ -17,10 +17,6 @@ module.exports = (app) => {
     app.post('/balances/deposit/:userId', getProfile, ProfileController.deposit)
 
     // Admin
-    //Returns the profession that earned the most money (sum of jobs paid)
-    // for any contactor that worked in the query time range.
-    app.post('/admin/best-profession?start=:start&end=:end', ReportController.bestProfession)
-    //returns the clients the paid the most for jobs in the query time period.
-    // limit query parameter should be applied, default limit is 2.
-    app.post('/admin/best-clients?start=:start&end=:end&limit=:limit', ReportController.bestClients)
+    app.get('/admin/best-profession', getProfile, ReportController.bestProfession)
+    app.get('/admin/best-clients', getProfile, ReportController.bestClients)
 }

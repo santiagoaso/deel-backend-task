@@ -1,12 +1,11 @@
-const reportService = require('../services/report')
-
+const ReportService = require('../services/report')
+const DEFAULT_LIMIT = 2
 exports.bestProfession = async (req, res) => {
-    const {job_id: jobId} = req.params
-    if (!jobId) return res.status(400).end()
+    const {start, end} = req.params
+    //if (!start || !end) return res.status(400).end()
 
-    const profile = req.profile
     try {
-        const response = await JobService.pay(jobId, profile)
+        const response = await ReportService.bestProfession(start, end)
         res.json(response)
     } catch (e) {
         return res.status(e.statusCode).json({error: e.message}).end()
@@ -14,12 +13,12 @@ exports.bestProfession = async (req, res) => {
 }
 
 exports.bestClients = async (req, res) => {
-    const {job_id: jobId} = req.params
-    if (!jobId) return res.status(400).end()
+    const {start, end} = req.params
+    //if (!start || !end) return res.status(400).end()
+    const limit = req.params.limit || DEFAULT_LIMIT
 
-    const profile = req.profile
     try {
-        const response = await JobService.pay(jobId, profile)
+        const response = await ReportService.bestClients(start, end, limit)
         res.json(response)
     } catch (e) {
         return res.status(e.statusCode).json({error: e.message}).end()
