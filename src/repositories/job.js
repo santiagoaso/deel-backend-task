@@ -1,17 +1,13 @@
 const Job = require('../models/job')
 const Contract = require('../models/contract')
-const {Op} = require("sequelize");
+const {contractAccessible} = require('../db/helper')
 
 exports.getUnpaid = async (profileId) => {
     return Job.findAll({
         include: [{
             model: Contract,
             required: true,
-            where: {
-                [Op.or]: [
-                    { ClientId: profileId },
-                    { ContractorId: profileId }
-                ]}
+            where: contractAccessible(profileId)
         }],
         where: {
             paid: false
