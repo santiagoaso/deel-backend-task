@@ -2,6 +2,9 @@ const { Model, TEXT, DECIMAL, BOOLEAN, DATE } = require("sequelize")
 const db = require('../db/sequelize')
 
 class Job extends Model {
+
+    static get PRICE() { return 'price' }
+
     static relationships(models) {
         Job.belongsTo(models.Contract)
     }
