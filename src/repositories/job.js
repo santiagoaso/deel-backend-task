@@ -7,7 +7,10 @@ exports.getUnpaid = async (profileId) => {
         include: [{
             model: Contract,
             required: true,
-            where: contractAccessible(profileId)
+            where: {
+                status: Contract.STATUS_ACTIVE,
+                ...contractAccessible(profileId)
+            }
         }],
         where: {
             paid: false
