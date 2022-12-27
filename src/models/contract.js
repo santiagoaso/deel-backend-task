@@ -1,4 +1,4 @@
-const { Model, ENUM, TEXT } = require("sequelize");
+const { Model, ENUM, TEXT } = require("sequelize")
 const db = require('../db/sequelize')
 
 class Contract extends Model {
@@ -11,9 +11,9 @@ class Contract extends Model {
     updatedAt
 
     static associate(models) {
-        Contract.belongsTo(models.Profile, { as: "Contractor" });
-        Contract.belongsTo(models.Profile, { as: "Client" });
-        Contract.hasMany(models.Job);
+        Contract.belongsTo(models.Profile, { as: "Contractor" })
+        Contract.belongsTo(models.Profile, { as: "Client" })
+        Contract.hasMany(models.Job)
     }
 }
 
@@ -31,6 +31,6 @@ Contract.init(
         sequelize: db,
         modelName: 'Contract'
     }
-);
+)
 
-module.exports = Contract;
+module.exports = Contract

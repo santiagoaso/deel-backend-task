@@ -1,4 +1,4 @@
-const {Op} = require("sequelize");
+const {Op} = require("sequelize")
 
 const Contract = require('../models/contract')
 
