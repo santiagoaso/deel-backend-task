@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "b0606574-a0d0-46e9-9040-57ad09be3521",
+		"name": "deel-backend-task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19332531"
+	},
+	"item": [
+		{
+			"name": "Contract",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{API_BASE_URL}}/contracts/1",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"contracts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contracts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{API_BASE_URL}}/contracts",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"contracts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Jobs unpaid",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "2",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{API_BASE_URL}}/jobs/unpaid",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"jobs",
+						"unpaid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Best Profession",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "2",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{API_BASE_URL}}/admin/best-profession?start=2020-08-01&end=2020-08-20",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"admin",
+						"best-profession"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2020-08-01"
+						},
+						{
+							"key": "end",
+							"value": "2020-08-20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Best Clients",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{API_BASE_URL}}/admin/best-clients?start=2020-08-10&end=2020-08-17&limit=3",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"admin",
+						"best-clients"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2020-08-10"
+						},
+						{
+							"key": "end",
+							"value": "2020-08-17"
+						},
+						{
+							"key": "limit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Job Pay",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{API_BASE_URL}}/jobs/1/pay",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"jobs",
+						"1",
+						"pay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deposit",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/balances/deposit/1",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"balances",
+						"deposit",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "API_BASE_URL",
+			"value": "http://localhost:3001"
+		}
+	]
+}
