@@ -10,9 +10,7 @@ const initializeModels = () => {
     }
 
     Object.values(models).forEach((model) => {
-        if (model.associate) {
-            model.associate(models)
-        }
+        if (model.relationships) model.relationships(models)
     })
 }
 

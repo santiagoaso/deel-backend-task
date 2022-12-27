@@ -2,7 +2,7 @@ const { Model, ENUM, TEXT } = require("sequelize")
 const db = require('../db/sequelize')
 
 class Contract extends Model {
-    static associate(models) {
+    static relationships(models) {
         Contract.belongsTo(models.Profile, { as: "Contractor" })
         Contract.belongsTo(models.Profile, { as: "Client" })
         Contract.hasMany(models.Job)
