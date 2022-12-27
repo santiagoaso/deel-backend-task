@@ -1,5 +1,6 @@
 const {getProfile} = require('./middleware/getProfile')
 const ContractController = require('./controllers/contract')
+const ProfileController = require('./controllers/profile')
 const JobController = require('./controllers/job')
 
 module.exports = (app) => {
@@ -10,4 +11,8 @@ module.exports = (app) => {
     // Jobs
     app.get('/jobs/unpaid', getProfile, JobController.getUnpaid)
     app.post('/jobs/:job_id/pay', getProfile, JobController.pay)
+
+    // Profiles
+    app.post('/balances/deposit/:userId', getProfile, ProfileController.deposit)
+
 }

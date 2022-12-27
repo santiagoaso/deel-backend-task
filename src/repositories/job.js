@@ -23,9 +23,8 @@ exports.get = async (id, options = {}) => {
         options
     )
 }
-
-exports.getUnpaid = async (profileId) => {
-    return await Job.findAll({
+unpaidQuery = (profileId) => {
+    return {
         include: [{
             model: Contract,
             required: true,
@@ -37,5 +36,14 @@ exports.getUnpaid = async (profileId) => {
         where: {
             paid: false
         }
-    })
+    }
+}
+
+exports.getUnpaid = async (profileId) => {
+    return await Job.findAll(unpaidQuery(profileId))
+}
+
+
+exports.getSumUnpaid = async (profileId) => {
+    return await Job.sum(Job.PRICE, unpaidQuery(profileId))
 }
