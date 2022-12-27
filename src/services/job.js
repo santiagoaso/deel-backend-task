@@ -30,24 +30,33 @@ doPay = async (jobToPay) => {
         const client = job.Contract.Client
         const contractor = job.Contract.Contractor
 
-        await client.update({
-            balance: job.Contract.Client.balance - job.price
-        }, options)
+        if (client.balance < job.price) {
+            throw new ValidationException('Client balance is not enough to pay selected job')
+        }
 
-        await contractor.update({
-            balance: job.Contract.Contractor.balance + job.price
-        }, options)
+        try {
+            await client.update({
+                balance: client.balance - job.price
+            }, options)
 
-        await job.update({
-            paid: true,
-            paymentDate: new Date(),
-        }, options)
+            await contractor.update({
+                balance: contractor.balance + job.price
+            }, options)
+
+            await job.update({
+                paid: true,
+                paymentDate: new Date(),
+            }, options)
+
+        } catch (e) {
+            throw new QueryException('Error on paying job')
+        }
 
         await transaction.commit();
         return job
     } catch (e) {
         transaction.rollback()
-        throw new QueryException('Error on paying job')
+        throw e
     }
 }
 
