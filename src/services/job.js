@@ -1,5 +1,5 @@
 const JobRepository = require('../repositories/job')
 
-exports.get = async (id) => {
-    return await JobRepository.get(id)
+exports.getUnpaid = async (profileId) => {
+    return await JobRepository.getUnpaid(profileId)
 }

@@ -1,10 +1,20 @@
 const Job = require('../models/job')
+const Contract = require('../models/contract')
+const {Op} = require("sequelize");
 
-exports.get = async (id) => {
-    return await Job.findOne({
+exports.getUnpaid = async (profileId) => {
+    return Job.findAll({
+        include: [{
+            model: Contract,
+            required: true,
+            where: {
+                [Op.or]: [
+                    { ClientId: profileId },
+                    { ContractorId: profileId }
+                ]}
+        }],
         where: {
-            id
-        },
-        raw: true
+            paid: false
+        }
     })
 }

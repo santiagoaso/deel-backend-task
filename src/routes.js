@@ -8,9 +8,6 @@ module.exports = (app) => {
     app.get('/contracts/:id', getProfile, ContractController.get)
     app.get('/contracts', getProfile, ContractController.getAll)
 
-    // Profiles
-    app.get('/profiles/:id', ProfileController.get)
-
     // Jobs
-    app.get('/jobs/:id', JobController.get)
+    app.get('/jobs/unpaid', getProfile, JobController.getUnpaid)
 }
