@@ -7,11 +7,11 @@ const {betweenDates} = require("../db/helper")
 
 exports.bestProfession = async (start, end) => {
     try {
-        return await Job.findAll({
+        return await Job.findOne({
             subQuery: false,
             attributes: [
                 'Contract->Contractor.profession',
-                [db.fn('SUM', db.col('price')), 'total']
+                [db.fn('MAX', db.col('price')), 'total']
             ],
             include: [{
                 model: Contract,
@@ -30,7 +30,7 @@ exports.bestProfession = async (start, end) => {
             },
             group: 'profession',
             raw: true,
-            order: [[db.fn('SUM', db.col('price')), 'DESC']]
+            order: [[db.fn('MAX', db.col('price')), 'DESC']]
         })
     } catch (e) {
         throw QueryException('Error obtaining best profession')
@@ -38,7 +38,35 @@ exports.bestProfession = async (start, end) => {
 }
 
 exports.bestClients = async (start, end, limit) => {
-    //returns the clients the paid the most for jobs in the query time period.
-    // limit query parameter should be applied, default limit is 2.
-    return 1
+    try {
+        return await Job.findAll({
+            subQuery: false,
+            attributes: [
+                'Contract->Client.id',
+                [db.literal("firstName || ' ' || lastName"), 'fullName'],
+                [db.fn('SUM', db.col('price')), 'paid']
+            ],
+            include: [{
+                model: Contract,
+                required: true,
+                attributes: [],
+                include: [{
+                    model: Profile,
+                    required: true,
+                    as: 'Client',
+                    attributes: []
+                }]
+            }],
+            where: {
+                paymentDate: betweenDates(start, end),
+                paid: true
+            },
+            group: 'Contract->Client.id',
+            raw: true,
+            order: [[db.fn('SUM', db.col('price')), 'DESC']],
+            limit
+        })
+    } catch (e) {
+        throw QueryException('Error obtaining best clients')
+    }
 }

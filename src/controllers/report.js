@@ -7,7 +7,7 @@ exports.bestProfession = async (req, res) => {
 
     try {
         const response = await ReportService.bestProfession(start, end)
-        res.json(response)
+        response ? res.json(response) : res.json('No contractor received money in that date range')
     } catch (e) {
         return res.status(e.statusCode).json({error: e.message}).end()
     }
@@ -20,7 +20,6 @@ exports.bestClients = async (req, res) => {
 
     try {
         const response = await ReportService.bestClients(start, end, limit)
-        res.json(response)
     } catch (e) {
         return res.status(e.statusCode).json({error: e.message}).end()
     }
