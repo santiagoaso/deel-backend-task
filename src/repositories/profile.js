@@ -1,10 +1,7 @@
-const Profile = require('../models/contract')
+const Profile = require('../models/profile')
 
 exports.get = async (id) => {
     return await Profile.findOne({
-        where: {
-            id
-        },
-        raw: true
+        where: { id }
     })
 }
