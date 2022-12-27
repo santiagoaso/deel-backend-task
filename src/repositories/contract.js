@@ -12,3 +12,13 @@ exports.get = async (id, profileId) => {
             ]}
     })
 }
+
+exports.getAll = async (profileId) => {
+    return Contract.findAll({
+        where: {
+            [Op.or]: [
+                { ClientId: profileId },
+                { ContractorId: profileId }
+            ]}
+    })
+}
