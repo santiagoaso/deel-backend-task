@@ -20,6 +20,7 @@ exports.bestClients = async (req, res) => {
 
     try {
         const response = await ReportService.bestClients(start, end, limit)
+        res.json(response)
     } catch (e) {
         return res.status(e.statusCode).json({error: e.message}).end()
     }
