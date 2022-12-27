@@ -1,14 +1,17 @@
-const {Op} = require("sequelize")
-
 const Contract = require('../models/contract')
+const {contractAccessible} = require('../db/helper')
 
 exports.get = async (id, profileId) => {
     return Contract.findOne({
         where: {
             id,
-            [Op.or]: [
-                { ClientId: profileId },
-                { ContractorId: profileId }
-            ]}
+            ...contractAccessible(profileId)
+        }
+    })
+}
+
+exports.getAll = async (profileId) => {
+    return Contract.findAll({
+        where: contractAccessible(profileId)
     })
 }
