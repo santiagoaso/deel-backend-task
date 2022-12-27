@@ -9,6 +9,16 @@ const contractAccessible = (profileId) => {
     }
 }
 
+const betweenDates = (start, end) => {
+    return {
+        [Op.between]: [
+            start,
+            end
+        ]
+    }
+}
+
 module.exports = {
-    contractAccessible
+    contractAccessible,
+    betweenDates
 }

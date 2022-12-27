@@ -1,6 +1,7 @@
 const ProfileService = require('../services/profile')
 const Profile = require('../models/profile')
 const {ValidationException} = require("../utils/exceptions");
+const Logger = require("../utils/logger");
 
 exports.get = async (req, res) => {
     const {id} = req.params
@@ -30,16 +31,35 @@ exports.deposit = async (req, res) => {
     const profile = req.profile
     const amount = req.body.amount
 
+    Logger.info('profile_controller.deposit.start', {
+        profileId,
+        amount
+    })
     try {
         validateParams(profile, profileId, amount)
     } catch (e) {
+        Logger.warning('profile_controller.deposit.invalid_params', {
+            profileId,
+            amount,
+            error: e.message
+        })
         return res.status(e.statusCode).json({error: e.message}).end()
     }
 
     try {
         const response = await ProfileService.deposit(profile, amount)
+        Logger.info('profile_controller.deposit.success', {
+            profileId,
+            amount,
+            response
+        })
         res.json(response)
     } catch (e) {
+        Logger.error('profile_controller.deposit.error', {
+            profileId,
+            amount,
+            error: e.message
+        })
         return res.status(e.statusCode).json({error: e.message}).end()
     }
 }
