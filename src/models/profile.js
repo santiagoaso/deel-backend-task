@@ -2,15 +2,6 @@ const { Model, STRING, DECIMAL, ENUM } = require("sequelize")
 const db = require('../db/sequelize')
 
 class Profile extends Model {
-    id
-    firstName
-    lastName
-    profession
-    balance
-    type
-    createdAt
-    updatedAt
-
     static associate(models) {
         Profile.hasMany(models.Contract, {as :'Contractor',foreignKey:'ContractorId'})
         Profile.hasMany(models.Contract, {as : 'Client', foreignKey:'ClientId'})

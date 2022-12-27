@@ -2,13 +2,6 @@ const { Model, TEXT, DECIMAL, BOOLEAN, DATE } = require("sequelize")
 const db = require('../db/sequelize')
 
 class Job extends Model {
-    id
-    ContractId
-    price
-    paid
-    paymentDate
-    createdAt
-    updatedAt
     static associate(models) {
         Job.belongsTo(models.Contract)
     }

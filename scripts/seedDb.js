@@ -1,7 +1,8 @@
 const Contract = require('../src/models/contract')
 const Profile = require('../src/models/profile')
 const Job = require('../src/models/job')
-
+const {initializeModels} = require('../src/models/init')
+initializeModels()
 /* WARNING THIS WILL DROP THE CURRENT DATABASE */
 seed();
 
