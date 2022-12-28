@@ -10,9 +10,9 @@ exports.get = async (req, res) => {
     res.json(contract)
 }
 
-exports.getAll = async (req, res) => {
+exports.getNonTerminated = async (req, res) => {
     const profileId = req.profile.id
 
-    const contracts = await ContractService.getAll(profileId)
+    const contracts = await ContractService.getNonTerminated(profileId)
     res.json(contracts)
 }

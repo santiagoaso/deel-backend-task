@@ -7,7 +7,7 @@ const ReportController = require('./controllers/report')
 module.exports = (app) => {
     // Contracts
     app.get('/contracts/:id', getProfile, ContractController.get)
-    app.get('/contracts', getProfile, ContractController.getAll)
+    app.get('/contracts', getProfile, ContractController.getNonTerminated)
 
     // Jobs
     app.get('/jobs/unpaid', getProfile, JobController.getUnpaid)
