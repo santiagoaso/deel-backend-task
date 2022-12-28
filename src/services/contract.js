@@ -4,6 +4,6 @@ exports.get = async (id, profileId) => {
     return await ContractRepository.get(id, profileId)
 }
 
-exports.getAll = async (profileId) => {
-    return await ContractRepository.getAll(profileId)
+exports.getNonTerminated = async (profileId) => {
+    return await ContractRepository.getNonTerminated(profileId)
 }

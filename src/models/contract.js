@@ -3,6 +3,7 @@ const db = require('../db/sequelize')
 
 class Contract extends Model {
     static get STATUS_ACTIVE() { return 'in_progress' }
+    static get STATUS_TERMINATED() { return 'terminated' }
 
     static relationships(models) {
         Contract.belongsTo(models.Profile, { as: "Contractor" })
