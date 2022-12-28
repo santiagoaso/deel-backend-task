@@ -6,7 +6,7 @@ exports.getUnpaid = async (profileId) => {
     return await JobRepository.getUnpaid(profileId)
 }
 
-validatePayment = (profile, job) => {
+exports.validatePayment = (profile, job) => {
     if (!job) {
         throw new NotFoundException('Job not found')
     }
@@ -62,6 +62,6 @@ doPay = async (jobToPay) => {
 
 exports.pay = async (jobId, profile) => {
     const job = await JobRepository.get(jobId)
-    validatePayment(profile, job)
+    this.validatePayment(profile, job)
     return await doPay(job)
 }

@@ -7,7 +7,7 @@ exports.get = async (id, options = {}) => {
     return await ProfileRepository.get(id, options)
 }
 
-validateDeposit = (amount, unpaidSum) => {
+exports.validateDeposit = (amount, unpaidSum) => {
     if (amount > unpaidSum * 0.25) {
         throw new ValidationException('Client can not deposit more than 25% of jobs to pay')
     }
@@ -38,6 +38,6 @@ doDeposit = async (profile, amount) => {
 
 exports.deposit = async (profile, amount) => {
     const unpaidSum = await JobRepository.getSumUnpaid(profile.id) || 0
-    validateDeposit(amount, unpaidSum)
+    this.validateDeposit(amount, unpaidSum)
     return await doDeposit(profile, amount)
 }
